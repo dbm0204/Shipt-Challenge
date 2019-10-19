@@ -7,7 +7,8 @@ Compiler:   Python 3.X
 
 """
 import os
-import unititest
+from FirefoxUtils import FireFoxUtils
+from FirefoxUtils import ChromeDriverUtils
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
@@ -15,17 +16,13 @@ class TestUtils():
 
     def __init__(self,browser="chrome"):
         if browser == "firefox":
-            package_dir = os.path.dirname(os.path.abspath(__file__))
-            firefox_bin = os.path.join(package_dir,"geckodriver")
-            self.fireFox_binary = FirefoxBinary(firefox_bin)
-            self.driver = webdriver.Firefox()
+            fox = FireFoxUtils()
+            self.driver = fox.getBrowser()
             
         elif browser == "chome":
-            package_dir = os.path.dirname(os.path.abspath(__file__))
-            firefox_bin = os.path.join(package_dir,"chromediver")
-            self.driver = webdriver.Chrome()
+            chrome = ChromeDriverUtils()
+            self.driver = chrome.getBrowser()
 
-    
     def getDriver(self):
         return self.driver
 
@@ -34,7 +31,25 @@ class TestUtils():
 
     def goToUrl(self,link):
         try:
-            self.driver.get("www.shipt.com")
+            self.driver.get(link)
         except Exception as e:
             print("ERROR:Failed to load URL\n"+str(e))
+    
+    def test_shopping_chart(self):
+        try:
+            self.goToUrl("www.https://shop.shipt.com/")
+            self.driver.set_page_load_timeout(10)
+
+        except Exception as e:
+            print("Error:")
+            print(str(e))
+
+
+def main():
+    utils = TestUtils()
+    utils.test_shopping_chart()
+
+
+if __name__=='__main__':
+    main()
 
