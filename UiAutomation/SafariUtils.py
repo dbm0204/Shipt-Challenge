@@ -4,13 +4,17 @@
     Version:        1.0
     Compiler:       Python 3.X
     Python Package: Selenium 3.141.0 """
+
 """The below lines indicate the import statements"""
 import os
 import random
 import string
 from DriverUtils import driverUtils
 from selenium import webdriver
-
+"""SafariUtils is a class that contains instance of 
+the safari browser. It contains getter and setter functions 
+for the seafri deiver and the instance of the safari browser.
+"""
 class SafariUtils(driverUtils):
     #Default constructor
     def __init__(self):

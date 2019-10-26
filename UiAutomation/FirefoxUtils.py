@@ -10,7 +10,14 @@ import random
 import string
 from DriverUtils import driverUtils
 from selenium import webdriver
-
+from selenium.webdriver.firefox.options import Options
+"""
+FireFoxUtils is a class that instaniates an 
+instance of the firefox browser
+It contains memeber variiable such as 
+    the resource of the gekodriver.
+    the instance of the firefox browser.
+"""
 class FireFoxUtils(driverUtils):
     def __init__(self):
         #Instantiate a instance of gekodriver
@@ -22,7 +29,12 @@ class FireFoxUtils(driverUtils):
         #Setting the path of the driver
         self.set_driver_path(os.path.join(chrome_location,self.get_driver_name()))
         #Instantiating an instance of the browser object.
-        self.browser = webdriver.Chrome(executable_path=self.driver_path)
+        firefox_profile = webdriver.FirefoxProfile()
+        #Setting the browser to Incognito Mode
+        firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
+        self.browser = webdriver.WebDriver( executable_path=self.driver_path,
+                                            firefox_profile=firefox_profile)
+
 
     #Getting an instance of the browser sesstion
     def getBrowser(self):
