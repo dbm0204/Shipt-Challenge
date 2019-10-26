@@ -16,7 +16,7 @@ help:
 	@echo "build sphinx documentation"
 
 prepare-dev:
-	brew install python3.7 python3-pip
+	sudo apt-get python3.7 python3-pip
 	python3 -m pip install virtualenv
 	make venv
 
